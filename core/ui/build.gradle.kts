@@ -1,20 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
-
-    // Hilt
-    alias(libs.plugins.android.hilt)
-
-    // Ksp
-    alias(libs.plugins.kotlin.ksp)
-
-    // Serialization
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.company.example"
+    namespace = "com.company.ui"
     compileSdk {
         version = release(36)
     }
@@ -48,26 +38,10 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Bom
-    implementation(platform(libs.androidx.compose.bom))
-
-    // Navigation
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.compose.material.icons.extended)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler) // 또는 kapt(libs.hilt.compiler)
-
-    // Hilt Navigation Compose (ViewModel을 Composable에서 쉽게 사용)
-    implementation(libs.hilt.navigation.compose)
-
-    // Coil
-    implementation(libs.coil.compose)
+    // lifecycle.viewModel
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 }
