@@ -90,14 +90,14 @@ fun HomeSearchResult(
             )
         }
 
-        HandlePagingRefreshState(
+        handlePagingRefreshState(
             refreshState = refreshState,
             imageItems = imageItems,
             onClickItem = onClickItem,
             onToggleFavorite = onToggleFavorite
         )
 
-        HandlePagingAppendState(appendState = appendState, onRetry = imageItems::retry)
+        handlePagingAppendState(appendState = appendState, onRetry = imageItems::retry)
     }
 }
 
@@ -124,7 +124,7 @@ fun InitialSearchScreen() {
 /**
  * 첫 페이지 로드(refresh) 상태를 처리하는 Composable
  */
-private fun LazyGridScope.HandlePagingRefreshState(
+private fun LazyGridScope.handlePagingRefreshState(
     refreshState: LoadState,
     imageItems: LazyPagingItems<ImageItem>,
     onClickItem: (id: String, isVideo: Boolean) -> Unit,
@@ -199,7 +199,7 @@ private fun LazyGridScope.HandlePagingRefreshState(
 /**
  * 다음 페이지 로드(append) 상태를 처리하는 Composable
  */
-private fun LazyGridScope.HandlePagingAppendState(
+private fun LazyGridScope.handlePagingAppendState(
     appendState: LoadState,
     onRetry: () -> Unit
 ) {
