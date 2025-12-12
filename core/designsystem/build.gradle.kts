@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.company.ui"
+    namespace = "com.company.designsystem"
     compileSdk {
         version = release(36)
     }
@@ -42,26 +42,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // compose
-    implementation(libs.androidx.compose.runtime)
-
-    // lifecycle.viewModel
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-
-    implementation(libs.androidx.compose.material3)
-
-    // Bom
+    implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
-
-    // Navigation
-    implementation(libs.androidx.navigation.compose)
 
     // icon
     implementation(libs.androidx.compose.material.icons.extended)
-
-    // Hilt Navigation Compose (ViewModel을 Composable에서 쉽게 사용)
-    implementation(libs.hilt.navigation.compose)
-
-    // Coil
-    implementation(libs.coil.compose)
 }

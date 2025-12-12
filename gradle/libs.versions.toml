@@ -26,7 +26,8 @@ coil = "2.7.0"
 room = "2.8.3"
 paging = "3.3.0"
 serialization = "1.9.0"
-secretGradlePlugin = "2.0.1" # SecretGradlePlugin
+secretGradlePlugin = "2.0.1"
+runtime = "1.10.0" # SecretGradlePlugin
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -78,6 +79,7 @@ moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-code
 
 # Serialization
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
