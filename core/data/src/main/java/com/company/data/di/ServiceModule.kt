@@ -1,6 +1,6 @@
 package com.company.data.di
 
-import com.company.data.service.PixabayApiService
+import com.company.data.api.PixabayApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +16,7 @@ object ServiceModule {
      */
     @Provides
     @Singleton
-    fun providePixabayApiService(retrofit: Retrofit): PixabayApiService {
-        return retrofit.create(PixabayApiService::class.java)
+    fun providePixabayApiService(retrofit: Retrofit): PixabayApi {
+        return retrofit.create(PixabayApi::class.java)
     }
 }

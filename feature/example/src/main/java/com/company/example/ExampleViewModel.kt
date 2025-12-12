@@ -1,20 +1,26 @@
 package com.company.example
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.company.domain.model.ImageItem
+import com.company.domain.usecase.ExamplePagingUseCase
 import com.company.domain.usecase.ExampleUseCase
 import com.company.ui.base.BaseViewModel
 import com.company.ui.base.Intent
 import com.company.ui.base.SideEffect
 import com.company.ui.base.State
+import com.company.ui.common.UiStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class ExampleState(
-    val isLoading: Boolean = false,
+    val uiStatus: UiStatus = UiStatus.Idle,
     var searchQuery: String = "",
-    var images: List<ImageItem> = emptyList(),
+    var images: Flow<PagingData<ImageItem>> = flowOf(PagingData.empty()),
 ) : State()
 
 sealed class ExampleIntent : Intent() {
@@ -29,6 +35,7 @@ sealed class ExampleSideEffect : SideEffect() {
 @HiltViewModel
 class ExampleViewModel @Inject constructor(
     private val exampleUseCase: ExampleUseCase,
+    private val examplePagingUseCase: ExamplePagingUseCase,
 ) : BaseViewModel<ExampleState, ExampleIntent, ExampleSideEffect>(
     initialState = ExampleState()
 ) {
@@ -45,18 +52,22 @@ class ExampleViewModel @Inject constructor(
                         return@launch
                     }
 
-                    reduce { copy(isLoading = true) }
+                    reduce { copy(uiStatus = UiStatus.Loading) }
 
                     runCatching {
-                        val result = exampleUseCase(query)
+                        val perPage = 20
+                        val newPagingFlow = examplePagingUseCase(query, perPage)
+                            .cachedIn(viewModelScope)
+
                         reduce {
                             copy(
-                                isLoading = false,
-                                images = result
+                                uiStatus = UiStatus.Content,
+                                images = newPagingFlow
                             )
                         }
+
                     }.onFailure { e ->
-                        reduce { copy(isLoading = false) }
+                        reduce { copy(uiStatus = UiStatus.Error()) }
                         postSideEffect { ExampleSideEffect.ShowToast(e.message ?: "알 수 없는 오류가 발생했습니다.") }
                     }
                 }
@@ -64,5 +75,4 @@ class ExampleViewModel @Inject constructor(
             }
         }
     }
-
 }

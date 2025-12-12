@@ -15,4 +15,7 @@ kotlin {
 dependencies {
     implementation(libs.javax.inject)
     implementation(libs.kotlinx.coroutines.core)
+
+    // Paging
+    implementation(libs.androidx.paging.common)
 }

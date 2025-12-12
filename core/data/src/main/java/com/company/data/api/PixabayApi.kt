@@ -1,11 +1,11 @@
-package com.company.data.service
+package com.company.data.api
 
 import com.company.data.model.PixabayImageResponse
 import com.company.data.model.PixabayVideoResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface PixabayApiService {
+interface PixabayApi {
 
     /**
      * 이미지 API 호출 (BASE_URL/api/)
@@ -29,7 +29,7 @@ interface PixabayApiService {
         @Query("image_type") imageType: String = "photo",
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
-    ): PixabayVideoResponse
+    ): PixabayImageResponse
 
     /**
      * 특정 이미지 ID로 이미지 정보 가져오기
