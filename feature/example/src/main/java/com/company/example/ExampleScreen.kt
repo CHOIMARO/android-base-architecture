@@ -20,6 +20,7 @@ internal fun ExampleScreen(
     onClickItem: (String, Boolean) -> Unit,
     onToggleFavorite: (item: ImageItem, isFavorited: Boolean) -> Unit
 ) {
+
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {

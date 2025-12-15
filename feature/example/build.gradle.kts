@@ -50,11 +50,17 @@ dependencies {
     implementation(libs.material)
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
+    implementation(project(":core:testing"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.androidx.compose.material3)
+
+    // Test Code
+    testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     // Bom
     implementation(platform(libs.androidx.compose.bom))
